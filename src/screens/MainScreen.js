@@ -3,7 +3,7 @@ import { compose, withHandlers, withProps, didSubscribe } from 'proppy';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { attach } from 'proppy-react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Image } from 'react-native';
 import { NavigationBar, Title, Heading } from '@shoutem/ui';
 import { NavigationService } from '../services';
 
@@ -24,6 +24,9 @@ const MainScreen = ({ goTo, userData }) => {
     <View style={{ flex: 1, backgroundColor: '#eee' }}>
       <Heading>{`TITLE ${userData}`}></Heading>
       <Title>{`TITLE ${userData}`}</Title>
+      <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'red' }}>
+        <Image width="200" height="200" source={require('../../assets/images/expo-icon.png')} />
+      </View>
       <Button
         title="MainScreen asd"
         onPress={goTo}
