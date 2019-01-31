@@ -6,7 +6,10 @@ import { attach } from 'proppy-react';
 import { View, Text, Image } from 'react-native'
 import { Card, ListItem, Button } from 'react-native-elements';
 import { NavigationService } from '../services';
-import { Screen } from '../components';
+// import Header from '../components/layout/Header';
+import Container from '../components/layout/Container';
+import Content from '../components/layout/Content';
+// import { Header, Container } from '../components';
 
 const P = compose(
   withHandlers({
@@ -14,22 +17,18 @@ const P = compose(
       NavigationService.navigate({ routeName: screen });
     },
   }),
-  withProps(() => {
-    return {
-      headerProps: {
-        title: 'Home',
-      }
-    };
+  withProps({
+    title: 'Products',
   }),
   didSubscribe((props) => {
-    console.log('MainScreen MOUNT PROPS', props);
+    console.log('ProductsScreen MOUNT PROPS', props);
   }),
 );
-const MainScreen = ({ headerProps, goTo, userData }) => {
-  console.log('MainScreen RENDER', userData);
+const ProductsScreen = ({ goTo, userData }) => {
+  console.log('ProductsScreen RENDER', userData);
   return (
-    <Screen headerProps={headerProps} withContent>
-      <Card title="CARD WITH DIVIDER" style={{ backgroundColor: 'white' }}>
+    <Container>
+      <Card title="CARD WITH DIVIDER">
         <View>
             <Image
               resizeMode="cover"
@@ -55,13 +54,13 @@ const MainScreen = ({ headerProps, goTo, userData }) => {
           Welcome Screen
         </Text>
       </Button>
-    </Screen>
+    </Container>
   );
 };
 
-MainScreen.propTypes = {};
+ProductsScreen.propTypes = {};
 
-MainScreen.defaultProps = {
+ProductsScreen.defaultProps = {
   
 };
 
@@ -69,4 +68,10 @@ const mapStateToProps = state => ({
   userData: state.user.userData,
 });
 
-export default connect(mapStateToProps)(attach(P)(MainScreen));
+const ProductsScreenWithProppy = attach(P)(ProductsScreen);
+
+ProductsScreenWithProppy.navigationOptions = ({ title }) => ({
+  title: title ? title : `Products Screen`,
+});
+
+export default connect(mapStateToProps)(ProductsScreenWithProppy);

@@ -1,4 +1,4 @@
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, DrawerActions } from 'react-navigation';
 import AnalyticsService from './analtytics';
 import { setNewKeyForParams } from '../utils/helpers';
 
@@ -80,10 +80,9 @@ class NavigationService {
   }
 
   static async toggleDrawer() {
-    if (!_drawer) {
-      await initializedDrawerPromise;
-    }
-    _drawer.open();
+    _navigator.dispatch(
+      DrawerActions.toggleDrawer()
+    );
   }
 
 };

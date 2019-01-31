@@ -5,6 +5,7 @@ import { compose, withHandlers, didSubscribe } from 'proppy';
 import { attach } from 'proppy-react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { NavigationService } from '../../services';
+import variables from '../../theme/variables';
 
 const P = compose(
   withHandlers({
@@ -18,14 +19,6 @@ const P = compose(
     console.log('SidebarComponent MOUNT PROPS', props);
   }),
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: 200,
-    backgroundColor: 'blue',
-  }
-});
 
 const SidebarComponent = ({ goTo }) => {
   console.log('SidebarComponent RENDER');
@@ -50,6 +43,14 @@ const SidebarComponent = ({ goTo }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: 200,
+    backgroundColor: 'black',
+  }
+});
 
 SidebarComponent.propTypes = {};
 

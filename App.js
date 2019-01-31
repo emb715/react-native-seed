@@ -6,9 +6,11 @@ import { compose, withState, withHandlers, withProps } from 'proppy';
 import selectorPlugin from '@rematch/select';
 import { ProppyProvider } from 'proppy-react';
 import { Font, AppLoading, Asset } from 'expo';
+import { StyleProvider } from '@shoutem/theme';
 import models from './src/modules';
 import { NavigationService, ErrorHandlerService } from './src/services';
 import { router as Router } from './src/router';
+import theme from './src/theme';
 
 const fontsToLoad = {
   'Rubik-Black': require('./node_modules/@shoutem/ui/fonts/Rubik-Black.ttf'),
@@ -71,13 +73,15 @@ const App = ({ loading, loadAssets, setLoading, loadAssetsFail }) => {
   return (
     <Provider store={store}>
       <ProppyProvider providers={providers}>
-        <Router
-          ref={navigatorRef => NavigationService.initialize({ navigatorRef, providers })}
-          onNavigationStateChange={
-            (prevState, newState, action) => NavigationService.onNavigationChange(prevState, newState, action)
-          }
-          uriPrefix="/"
-        />
+        <StyleProvider style={theme}>
+          <Router
+              ref={navigatorRef => NavigationService.initialize({ navigatorRef, providers })}
+              onNavigationStateChange={
+                (prevState, newState, action) => NavigationService.onNavigationChange(prevState, newState, action)
+              }
+              uriPrefix="/"
+            />
+        </StyleProvider>
       </ProppyProvider>
     </Provider>
   );

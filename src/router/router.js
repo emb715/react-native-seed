@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { createSwitchNavigator, createAppContainer, createStackNavigator, createDrawerNavigator } from 'react-navigation';
 import { 
   _HandleLoadingScreen,
@@ -8,26 +7,16 @@ import {
   WelcomeScreen,
   MainScreen,
 } from '../screens';
-import RegularUserRouter from './regularUserRouter';
-import Sidebar from '../components/sidebar/Sidebar';
+import RegularUserNavigator from './regularUserNavigator';
 
-const RegularUserStack = createDrawerNavigator({
-  RegularUser: {
-    screen: RegularUserRouter,
-  },
-}, {
-  headerMode: 'none',
-  contentComponent: Sidebar,
-});
-
-const NewUserRouter = createSwitchNavigator({
+const NewUserNavigation = createSwitchNavigator({
   Profile: ProfileScreen,
 });
 
 const AppRouter = createSwitchNavigator({
   _HandleUserInit: _HandleUserInitScreen,
-  NewUser: NewUserRouter,
-  Main: RegularUserStack,
+  NewUser: NewUserNavigation,
+  Main: RegularUserNavigator,
 }, {
   initialRouteKey: '',
   initialRouteName: '_HandleUserInit',

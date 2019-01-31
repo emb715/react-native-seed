@@ -3,22 +3,23 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers, didSubscribe } from 'proppy';
 // import { connect } from 'react-redux';
 import { attach } from 'proppy-react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 import { NavigationService } from '../services';
+import AvatarItem from '../components/avatar/Avatar';
 
 const P = compose(
   withHandlers({
     goTo: ({ navigation }, { dispatch }) => () => {
       console.log('welcomeScreen button pressed');
-      dispatch.user.setIsLogin(true);
+      // dispatch.user.setIsLogin(true);
       // navigation.navigate({ routeName: 'App' })
       // { routeName, params, action, key }
-      NavigationService.navigate({ routeName: 'App' });
+      NavigationService.navigate({ routeName: 'Main' });
     },
   }),
   didSubscribe((props) => {
     console.log('WelcomeScreen PROPS', props);
-    // console.log('WelcomeScreen NavigationService.getNavigator', NavigationService.getNavigator());
   }),
 );
 
@@ -43,6 +44,5 @@ WelcomeScreen.propTypes = {};
 
 WelcomeScreen.defaultProps = {
 };
-
 
 export default attach(P)(WelcomeScreen);
