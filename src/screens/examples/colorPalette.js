@@ -12,6 +12,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  card: {
+    padding: variables.gap.md,
+    marginBottom: variables.gap.md,
+    backgroundColor: 'white',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
   box: {
     alignContent: 'center',
     justifyContent: 'center',
@@ -32,21 +45,65 @@ const styles = StyleSheet.create({
 });
 
 const ColorPalette = () => {
-  const { neutral } = variables.colors;
+  const { neutral, primary, secundary, accent } = variables.colors;
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Neutral Palette</Text>
-      <ScrollView contentContainerStyle={styles.content} horizontal>
-        {Object.keys(neutral).map((index) => {
-          const isLight = color(neutral[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
-          return (
-            <View key={index} style={[styles.box, { backgroundColor: neutral[index] }]}>
-              <Text style={[styles.box__text, isLight]}>{index}</Text>
-              <Text style={[styles.box__text, isLight]}>{neutral[index]}</Text>
-            </View>
-          );
-        })}
-      </ScrollView>
+      <View style={styles.card}>
+        <Text style={styles.title}>Neutral Palette</Text>
+        <ScrollView contentContainerStyle={styles.content} horizontal>
+          {Object.keys(neutral).map((index) => {
+            const isLight = color(neutral[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
+            return (
+              <View key={index} style={[styles.box, { backgroundColor: neutral[index] }]}>
+                <Text style={[styles.box__text, isLight]}>{index}</Text>
+                <Text style={[styles.box__text, isLight]}>{neutral[index]}</Text>
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.title}>Primary Palette</Text>
+        <ScrollView contentContainerStyle={styles.content} horizontal>
+          {Object.keys(primary).map((index) => {
+            const isLight = color(primary[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
+            return (
+              <View key={index} style={[styles.box, { backgroundColor: primary[index] }]}>
+                <Text style={[styles.box__text, isLight]}>{index}</Text>
+                <Text style={[styles.box__text, isLight]}>{primary[index]}</Text>
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.title}>Secundary Palette</Text>
+        <ScrollView contentContainerStyle={styles.content} horizontal>
+          {Object.keys(secundary).map((index) => {
+            const isLight = color(secundary[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
+            return (
+              <View key={index} style={[styles.box, { backgroundColor: secundary[index] }]}>
+                <Text style={[styles.box__text, isLight]}>{index}</Text>
+                <Text style={[styles.box__text, isLight]}>{secundary[index]}</Text>
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.title}>Accent Palette</Text>
+        <ScrollView contentContainerStyle={styles.content} horizontal>
+          {Object.keys(accent).map((index) => {
+            const isLight = color(accent[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
+            return (
+              <View key={index} style={[styles.box, { backgroundColor: accent[index] }]}>
+                <Text style={[styles.box__text, isLight]}>{index}</Text>
+                <Text style={[styles.box__text, isLight]}>{accent[index]}</Text>
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
     </View>
   )
 };
