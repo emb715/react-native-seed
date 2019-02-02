@@ -1,10 +1,11 @@
 import React from 'react';
-import { compose, withHandlers, withStateHandlers, didSubscribe } from 'proppy';
+import { compose, withProps, withHandlers, withStateHandlers, didSubscribe } from 'proppy';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 import { attach } from 'proppy-react';
 import { View, Text, Button, TextInput } from 'react-native';
 import { NavigationService } from '../services';
+import { Screen } from '../components';
 
 const P = compose(
   withStateHandlers({
@@ -22,15 +23,22 @@ const P = compose(
       NavigationService.navigate({ routeName: 'Main', params: { isNewUser: true } });
     },
   }),
+  withProps(() => {
+    return {
+      headerProps: {
+        title: 'Profile',
+      }
+    };
+  }),
   didSubscribe((props) => {
     console.log('ProfileScreen MOUNT PROPS', props);
   }),
 );
 
-const ProfileScreen = ({ goTo, handleChangeText, userData }) => {
+const ProfileScreen = ({ headerProps, goTo, handleChangeText, userData }) => {
   console.log('ProfileScreen RENDER');
   return (
-    <View style={{ marginTop: 200 }}>
+    <Screen headerProps={headerProps} withContent>
       <TextInput
         value={userData}
         onChangeText={handleChangeText}
@@ -44,7 +52,7 @@ const ProfileScreen = ({ goTo, handleChangeText, userData }) => {
           Save Profile
         </Text>
       </Button>
-    </View>
+    </Screen>
   );
 };
 
