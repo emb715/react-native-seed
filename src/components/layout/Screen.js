@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import Container from './Container';
 import Header from './Header';
 import Content from './Content';
@@ -16,9 +16,8 @@ const Screen = ({
     {withHeader && (
       <Header {...headerProps} />
     )}
-    {/* TODO: change for Content Component */}
     {withScroll
-      ? (<ScrollView {...contentProps}>{children}</ScrollView>)
+      ? (<Content {...contentProps}>{children}</Content>)
       : (<View {...contentProps}>{children}</View>)
     }
   </Container>
