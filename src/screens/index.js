@@ -1,5 +1,5 @@
 import MainScreen from './MainScreen';
-import WelcomeScreen from './WelcomeScreen';
+import WelcomeScreen from './auth/WelcomeScreen';
 import _HandleLoadingScreen from './_HandleLoadingScreen';
 import _HandleUserInitScreen from './_HandleUserInitScreen';
 import ProfileScreen from './ProfileScreen';
