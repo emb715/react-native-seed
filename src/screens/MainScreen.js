@@ -4,7 +4,7 @@ import { compose, withHandlers, withProps, didSubscribe } from 'proppy';
 import { connect } from 'react-redux';
 import { attach } from 'proppy-react';
 import { View, Text, Image } from 'react-native'
-import { Card, ListItem, Button } from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
 import { NavigationService } from '../services';
 import { Screen } from '../components';
 
