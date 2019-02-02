@@ -5,7 +5,6 @@ import {
   _HandleUserInitScreen,
   ProfileScreen,
   WelcomeScreen,
-  MainScreen,
 } from '../screens';
 import RegularUserNavigator from './regularUserNavigator';
 
@@ -26,7 +25,7 @@ const AppRouter = createSwitchNavigator({
 const AuthRouter = createSwitchNavigator({
   Welcome: {
     screen: WelcomeScreen,
-  }
+  },
 }, {
   initialRouteKey: '',
   initialRouteName: 'Welcome',
