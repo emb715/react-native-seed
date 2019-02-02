@@ -4,6 +4,7 @@ import Header from './layout/Header';
 import Container from './layout/Container';
 import Content from './layout/Content';
 import Avatar from './avatar/Avatar';
+import Heading from './heading/Heading';
 
 export {
   Screen,
@@ -12,4 +13,5 @@ export {
   Container,
   Content,
   Avatar,
+  Heading,
 };
