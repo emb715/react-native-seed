@@ -1,27 +1,26 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StyleSheet, ScrollView } from 'react-native';
 import variables from '../../theme/variables';
 
-const Content = (props) => (
-  <KeyboardAwareScrollView
-    style={[styles.content, ...props.style]}
-    contentContainerStyle={[ styles.contentContainer, ...props.contentContainerStyle]}
-    {...props}
+const Content = ({ children, style, contentContainerStyle }) => (
+  <ScrollView
+    style={styles.content}
+    contentContainerStyle={styles.contentContainer}
   >
-    {props.children}
-  </KeyboardAwareScrollView>
+    {children}
+  </ScrollView>
 );
 const styles = StyleSheet.create({
-  content: {
-    backgroundColor: variables.colors.neutral[500],
-  },
+  content: {},
   contentContainer: {
     padding: variables.gap.md,
   }
 });
 
 Content.defaultProps = {
+  children: null,
+  style: {},
+  contentContainerStyle: {},
 };
 
 export default Content;
