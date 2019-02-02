@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { attach } from 'proppy-react';
 import { Header } from 'react-native-elements';
 import { NavigationService } from '../../services';
+import variables from '../../theme/variables';
 
 const P = compose(
   withHandlers({
@@ -11,27 +12,30 @@ const P = compose(
       NavigationService.navigate({ routeName: screen });
     },
     leftComponentOnPress: () => () => {
-      console.log('Menu click');
       NavigationService.toggleDrawer();
     },
     rightComponentOnPress: () => () => {
-      console.log('Header Right click');
-      // NavigationService.toggleDrawer();
     },
   }),
   withProps(({ leftComponentOnPress, rightComponentOnPress }) => {
     return {
-      title: 'title',
+      title: 'Header Title',
       textColor: '#fff',
-      style: {},
-      leftOptions: {
+      containerStyle: {
+        backgroundColor: variables.colors.primary[500],
+      },
+      defaultIconProps: {
+        underlayColor: variables.colors.primary[700],
+        iconStyle: {}
+      },
+      leftProps: {
         icon: 'menu',
         color: '#fff',
         size: 26,
         onPress: leftComponentOnPress,
       },
       leftComponent: null,
-      rightOptions: {},
+      rightProps: {},
       rightComponent: null,
       statusBarStyle: { barStyle: 'light-content' },
     };
@@ -44,13 +48,17 @@ const P = compose(
 const HeaderComponent = ({
   title,
   textColor,
-  style,
-  leftOptions,
+  leftProps,
   leftComponent,
-  rightOptions,
+  rightProps,
   rightComponent,
-  statusBarStyle
+  statusBarStyle,
+  containerStyle,
+  defaultIconProps,
 }) => {
+  const leftOptions = { ...defaultIconProps, ...leftProps };
+  const rightOptions = { ...defaultIconProps, ...rightProps };
+
   const renderLeftComponent = leftComponent
     ? leftComponent
     : leftOptions;
@@ -62,11 +70,11 @@ const HeaderComponent = ({
     <Header
       statusBarProps={statusBarStyle}
       leftComponent={renderLeftComponent}
+      outerContainerStyles={containerStyle}
       centerComponent={{
         text: title,
         style: { 
-          color: textColor, 
-          ...style 
+          color: textColor,
         }
       }}
       rightComponent={renderRightComponent}
@@ -75,11 +83,7 @@ const HeaderComponent = ({
 };
 
 HeaderComponent.propTypes = {
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array])
+  containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array])
 };
-
-// HeaderComponent.defaultProps = {
-  
-// };
 
 export default attach(P)(HeaderComponent);
