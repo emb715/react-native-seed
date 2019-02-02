@@ -1,12 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import color from 'color';
+import Color from 'color';
 import variables from '../../theme/variables';
 
 const styles = StyleSheet.create({
-  container: {
-    padding: variables.gap.md,
-  },
+  container: {},
   title: {},
   content: {
     flexDirection: 'row',
@@ -31,7 +29,6 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     margin: variables.gap.sm,
-    // backgroundColor: variables.colors.neutral[500],
   },
   box__text: {
     textAlign: 'center',
@@ -45,65 +42,25 @@ const styles = StyleSheet.create({
 });
 
 const ColorPalette = () => {
-  const { neutral, primary, secundary, accent } = variables.colors;
+  const { colors } = variables;
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.title}>Neutral Palette</Text>
+    {Object.keys(colors).map((color) => (
+      <View key={color} style={styles.card}>
+        <Text style={styles.title}>{`${color.toUpperCase()} Palette`}</Text>
         <ScrollView contentContainerStyle={styles.content} horizontal>
-          {Object.keys(neutral).map((index) => {
-            const isLight = color(neutral[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
+          {Object.keys(colors[color]).map((index) => {
+            const isLight = Color(colors[color][index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
             return (
-              <View key={index} style={[styles.box, { backgroundColor: neutral[index] }]}>
+              <View key={index} style={[styles.box, { backgroundColor: colors[color][index] }]}>
                 <Text style={[styles.box__text, isLight]}>{index}</Text>
-                <Text style={[styles.box__text, isLight]}>{neutral[index]}</Text>
+                <Text style={[styles.box__text, isLight]}>{colors[color][index]}</Text>
               </View>
             );
           })}
         </ScrollView>
       </View>
-      <View style={styles.card}>
-        <Text style={styles.title}>Primary Palette</Text>
-        <ScrollView contentContainerStyle={styles.content} horizontal>
-          {Object.keys(primary).map((index) => {
-            const isLight = color(primary[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
-            return (
-              <View key={index} style={[styles.box, { backgroundColor: primary[index] }]}>
-                <Text style={[styles.box__text, isLight]}>{index}</Text>
-                <Text style={[styles.box__text, isLight]}>{primary[index]}</Text>
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
-      <View style={styles.card}>
-        <Text style={styles.title}>Secundary Palette</Text>
-        <ScrollView contentContainerStyle={styles.content} horizontal>
-          {Object.keys(secundary).map((index) => {
-            const isLight = color(secundary[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
-            return (
-              <View key={index} style={[styles.box, { backgroundColor: secundary[index] }]}>
-                <Text style={[styles.box__text, isLight]}>{index}</Text>
-                <Text style={[styles.box__text, isLight]}>{secundary[index]}</Text>
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
-      <View style={styles.card}>
-        <Text style={styles.title}>Accent Palette</Text>
-        <ScrollView contentContainerStyle={styles.content} horizontal>
-          {Object.keys(accent).map((index) => {
-            const isLight = color(accent[index]).isLight() ? styles.text_BLACK : styles.text_LIGHT;
-            return (
-              <View key={index} style={[styles.box, { backgroundColor: accent[index] }]}>
-                <Text style={[styles.box__text, isLight]}>{index}</Text>
-                <Text style={[styles.box__text, isLight]}>{accent[index]}</Text>
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
+    ))}
     </View>
   )
 };
