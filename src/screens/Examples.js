@@ -1,10 +1,9 @@
 import React from 'react';
-import { compose, withHandlers, withProps, didSubscribe } from 'proppy';
-// import PropTypes from 'prop-types';
+import { compose, withHandlers, withProps } from 'proppy';
 import { attach } from 'proppy-react';
-import { View, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { NavigationService } from '../services';
-import { Screen } from '../components';
+import { Screen, Heading } from '../components';
 import ColorPalette from './examples/colorPalette';
 
 const P = compose(
@@ -23,23 +22,32 @@ const P = compose(
       }
     }
   })),
-  didSubscribe((props) => {
-    console.log('ExamplesScreen MOUNT PROPS', props);
-  }),
 );
-const ExamplesScreen = ({ headerProps }) => {
-  console.log('ExamplesScreen RENDER');
-  return (
-    <Screen withContent headerProps={headerProps}>
-      <View>
-        <Text>Color Palette</Text>
-        <ColorPalette />
-      </View>
-    </Screen>
-  );
-};
 
-ExamplesScreen.propTypes = {};
+const styles = StyleSheet.create({
+  divider: {
+    alignSelf: 'stretch',
+    height: 1,
+    marginVertical: 20,
+    backgroundColor: '#ccc',
+  }
+});
+
+const ExamplesScreen = ({ headerProps }) => (
+  <Screen withContent headerProps={headerProps}>
+    {/* COLOR PALETTE */}
+    <Heading h3>Color Palette</Heading>
+    <ColorPalette />
+    <View style={styles.divider}></View>
+    {/* HEADING */}
+    <Heading h1>Heading Text H1</Heading>
+    <Heading h2>Heading Text H2</Heading>
+    <Heading h3>Heading Text H3</Heading>
+    <Heading h4>Heading Text H4</Heading>
+    <Heading h5>Heading Text H5</Heading>
+    <View style={styles.divider}></View>
+  </Screen>
+);
 
 ExamplesScreen.defaultProps = {};
 
