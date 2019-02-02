@@ -1,7 +1,5 @@
 import React from 'react';
-// import { compose, withHandlers, withProps, didSubscribe } from 'proppy';
-// import { attach } from 'proppy-react';
-import { View, StyleSheet } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import Container from './Container';
 import Header from './Header';
 import Content from './Content';
@@ -9,24 +7,27 @@ import Content from './Content';
 const Screen = ({
   withHeader,
   headerProps,
-  withContent,
+  withScroll,
+  containerProps,
   contentProps,
   children,
 }) => (
-  <Container containerProps>
+  <Container {...containerProps}>
     {withHeader && (
       <Header {...headerProps} />
     )}
-    <View>
-      {children}
-    </View>
+    {/* TODO: change for Content Component */}
+    {withScroll
+      ? (<ScrollView {...contentProps}>{children}</ScrollView>)
+      : (<View {...contentProps}>{children}</View>)
+    }
   </Container>
 );
 
 Screen.defaultProps = {
   containerProps: {},
   withHeader: true,
-  withContent: true,
+  withScroll: true,
   headerProps: {},
   contentProps: {},
 };
