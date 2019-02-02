@@ -4,12 +4,9 @@ import { compose, withHandlers, withProps, didSubscribe } from 'proppy';
 import { connect } from 'react-redux';
 import { attach } from 'proppy-react';
 import { View, Text, Image } from 'react-native'
-import { Card, ListItem, Button } from 'react-native-elements';
+import { Card, Button } from 'react-native-elements';
 import { NavigationService } from '../services';
-// import Header from '../components/layout/Header';
-import Container from '../components/layout/Container';
-import Content from '../components/layout/Content';
-// import { Header, Container } from '../components';
+import { Screen } from '../components';
 
 const P = compose(
   withHandlers({
@@ -17,17 +14,22 @@ const P = compose(
       NavigationService.navigate({ routeName: screen });
     },
   }),
-  withProps({
-    title: 'Products',
+  withProps(() => {
+    return {
+      headerProps: {
+        title: 'Products',
+      }
+    };
   }),
   didSubscribe((props) => {
     console.log('ProductsScreen MOUNT PROPS', props);
   }),
 );
-const ProductsScreen = ({ goTo, userData }) => {
+
+const ProductsScreen = ({ goTo, userData, headerProps }) => {
   console.log('ProductsScreen RENDER', userData);
   return (
-    <Container>
+    <Screen headerProps={headerProps} withContent>
       <Card title="CARD WITH DIVIDER">
         <View>
             <Image
@@ -54,24 +56,16 @@ const ProductsScreen = ({ goTo, userData }) => {
           Welcome Screen
         </Text>
       </Button>
-    </Container>
+    </Screen>
   );
 };
 
 ProductsScreen.propTypes = {};
 
-ProductsScreen.defaultProps = {
-  
-};
+ProductsScreen.defaultProps = {};
 
 const mapStateToProps = state => ({
   userData: state.user.userData,
 });
 
-const ProductsScreenWithProppy = attach(P)(ProductsScreen);
-
-ProductsScreenWithProppy.navigationOptions = ({ title }) => ({
-  title: title ? title : `Products Screen`,
-});
-
-export default connect(mapStateToProps)(ProductsScreenWithProppy);
+export default connect(mapStateToProps)(attach(P)(ProductsScreen));
