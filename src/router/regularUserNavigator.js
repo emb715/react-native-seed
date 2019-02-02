@@ -9,7 +9,7 @@ import {
 import Sidebar from '../components/layout/Sidebar';
 
 const defaultStackNavigatorProps = {
-  // headerMode: 'none',
+  headerMode: 'none',
   headerBackTitleVisible: false,
 };
 
@@ -41,9 +41,6 @@ const Routes = {
   },
   Main: {
     screen: MainScreen,
-  },
-  Welcome: {
-    screen: WelcomeScreen,
   },
   Profile: {
     screen: ProfileNavigator,
