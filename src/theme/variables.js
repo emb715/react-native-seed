@@ -58,9 +58,12 @@ const input = {
 };
 
 const font = {
-  // family: '',
-  regular: unitDp,
-
+  smallest: 8,
+  small: 12,
+  regular: 16,
+  medium: 24,
+  large: 32,
+  largest: 48,
 };
 
 export default {
@@ -69,5 +72,5 @@ export default {
   containerHeight: Platform.OS === 'ios' ? deviceHeight : deviceHeight - 20,
   gap,
   colors,
-  size: gap,
+  font,
 };
