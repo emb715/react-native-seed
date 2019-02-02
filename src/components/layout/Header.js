@@ -57,7 +57,13 @@ const HeaderComponent = ({
   defaultIconProps,
 }) => {
   const leftOptions = { ...defaultIconProps, ...leftProps };
-  const rightOptions = { ...defaultIconProps, ...rightProps };
+  let rightOptions;
+
+  if (Object.keys(rightProps).length > 0) {
+    rightOptions = { ...defaultIconProps, ...rightProps };
+  } else {
+    // dummy space
+  }
 
   const renderLeftComponent = leftComponent
     ? leftComponent
